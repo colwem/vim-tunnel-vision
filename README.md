@@ -44,11 +44,11 @@ var blah = function(blam) {
 
 #####Legend
 
-blah | blam
-- | -
-bang | bong
-bing | bling
-bloop | blip
+|blah  | blam |
+|------|------|
+|bang  | bong |
+|bing  | bling|
+|bloop | blip |
 
 ```
 
