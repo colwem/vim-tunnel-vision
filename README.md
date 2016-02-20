@@ -69,7 +69,6 @@ var blah = function(blam) {
 ```
 But that's not the v you're looking for so you type `a` and it moves the
 highlight to:
-
 ```
 
 var blah = function(blam) {
@@ -125,8 +124,6 @@ var blah = function(blam) {
 };
 ```
 now we type `va` as before.  The new state is 
-
-
 ```
 
 var blah = function(blam) {
