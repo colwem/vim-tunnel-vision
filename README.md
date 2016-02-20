@@ -42,14 +42,13 @@ var blah = function(blam) {
 };
 ```
 
-#####Legend 
+#####Legend
 
-Symbol|Meaning
--|- 
-a|represents the cursor
-a|represents the target
-d|represents highlighted text
-
+blah | blam
+- | -
+bang | bong
+bing | bling
+bloop | blip
 
 ```
 
