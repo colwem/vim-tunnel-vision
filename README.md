@@ -44,11 +44,12 @@ var blah = function(blam) {
 
 #####Legend 
 
-| Symbol      | Meaning                     |
-| -           | -                           |
-| ^           | represents the cursor       |
-| &           | represents the target       |
-| \_{chars}\_ | represents highlighted text |
+Symbol|Meaning
+-|- 
+a|represents the cursor
+a|represents the target
+d|represents highlighted text
+
 
 ```
 
@@ -59,6 +60,9 @@ var^ blah = function(blam) {
   };
 };
 ```
+
+
+
 
 You type `,/` and it puts you in enters you into tunnel vision mode which we'll call `tv-mode` mode on the
 command line.  Now you type `v`.  The buffer is updated by highlighting next
