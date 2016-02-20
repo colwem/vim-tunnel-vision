@@ -203,6 +203,8 @@ Where sensible this basic function can be made to work similar to the other regu
 * `,?` Searches backward
 * `,w` Searches forward but limited to matches that start at a word boundary
 * `,b` Like `,w` but backwards
+* `,f` Like `,/` but limit to the current line
+* `,F` Like `,f` but backwards
 * `,^`,`,_` Search forward for matches that start with the first non-whitespace char
 
 ## Conclusion
