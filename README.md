@@ -11,7 +11,8 @@ have tunnel vision.
 Easymotion is very useful plugin but it has some serious flaws.  
 
 1. For some reason it's slow.  Especially on larger files when using something
-like ,,w or ,,b 2. To choose your target you need to type a new overlayed
+like ,,w or ,,b 
+2. To choose your target you need to type a new overlaid
 sequence of characters.  It takes precious time and energy for your brain to
 read and respond to this new input.
 
@@ -21,7 +22,7 @@ for.
 
 ## Progressive incremental search
 
-Incremental search is great but if there are many occurances of your search
+Incremental search is great but if there are many occurrences of your search
 string on the page then it will halt at the first instance it finds until you
 type so may characters that the location you're looking for is finally unique.
 What we want is for it to intelligently assume that if you're still typing then
@@ -40,33 +41,38 @@ var blah = function(blam) {
   };
 };
 ```
-Legend: 
-^ represents the cursor 
-& represents the target 
-\_<chars>\_ represents highlighted text 
+
+#####Legend 
+
+| Symbol      | Meaning                     |
+| -           | -                           |
+| ^           | represents the cursor       |
+| &           | represents the target       |
+| \_{chars}\_ | represents highlighted text |
+
 ```
 
 var^ blah = function(blam) {
   var bloop = function(blame) {
-    &var fundamental = blam;
-    var fact = blam;
+    var fundamental = blam;
+    &var fact = blam;
   };
 };
 ```
+
 You type `,/` and it puts you in enters you into tunnel vision mode which we'll call `tv-mode` mode on the
 command line.  Now you type `v`.  The buffer is updated by highlighting next
 v like this:
-
-
 ```
 
 var blah = function(blam) {
   _v_ar bloop = function(blame) {
     var fundamental = blam;
-    var fact = blam;
+    &var fact = blam;
   };
 };
 ```
+
 But that's not the v you're looking for so you type `a` and it moves the
 highlight to:
 ```
@@ -74,15 +80,14 @@ highlight to:
 var blah = function(blam) {
   var bloop = function(blame) {
     _va_r fundamental = blam;
-    var fact = blam;
+    &var fact = blam;
   };
 };
 ```
 
 Still not there so you type `r` and it moves the highlight again to:
-
-
 ```
+
 var blah = function(blam) {
   var bloop = function(blame) {
     var fundamental = blam;
@@ -90,6 +95,7 @@ var blah = function(blam) {
   };
 };
 ```
+
 Now we're where we want to be so we hit enter.
 
 With easymotion we would have had to type only 2 chars but they would have been
@@ -100,15 +106,15 @@ see.  If we had done regular /<pattern> then it would have found the first
 us to take our eyes off our target which ultimately distracts us from what we
 were planning to do once we got there.
 
-## Unique Post Text
+## Unique Identifying Character Overlays
 
-I'm sure you're thinking, ok, but what if there are 4 or 5 or 10 `var`s?
-There's still a lot of typing to do isn't there? To solve that problem use
-easymotions overlay technique but we use it better.  If you're still typing
+I'm sure you're thinking "okay, but what if there are 4 or 5 or 10 `var`s?
+There's still a lot of typing to do isn't there?" To solve that problem we will
+use easymotion's overlay technique but we'll use it better.  If you're still typing
 after the first 2 chars then we start overlaying the next char or next two
 chars with unique chars.  You are still free to keep typing chars from the
 original text but as soon as your mind registers the overlay chars you can type
-them and you immediately exit `tunnel-vision` mode and the cursor moves to that
+them and you immediately exit `tv-mode` and the cursor moves to that
 location.
 
 ### Example
@@ -135,7 +141,7 @@ var blah = function(blam) {
 ```
 Notice that the `r`'s in each `var` have changed to a different letter.  That
 letter uniquely identifies that instance of `var`.  Now lets say the user
-doesn't instantly notice the new letter and procedes to type the `r` anyways.
+doesn't instantly notice the new letter and proceeds to type the `r` anyways.
 The new state is now
 
 ```
@@ -152,7 +158,7 @@ Now the user can either type space or `j` and they're there.  If they type `j`
 then they exit `tv-mode` immediately.  If they type space then they must type
 enter otherwise we will just continue trying to match what they type.
 
-## Most likely first
+## Most Likely First
 
 Further optimization can be made by reasoning about what the most likely target
 actually is.  Since the goal of this plugin is to allow the user to stare at
@@ -183,11 +189,21 @@ var blah = function(blam) {
 ```
 we would start with `bl` and that would match 5 `bla`s and 1 `blo`.  So that's
 2 different branches that follow from the `bl` initial.  The `bla` branch is
-much more comean than the `blo` branch and so we reason it would have been more
+much more common than the `blo` branch and so we reason it would have been more
 difficult to reach through a traditional `/` and so we prioritize the `bla`
 matches over the `blo` matches. if the user then types an `a` then we follow
 the same reasoning to prioritize the 4 `blam`s over the 1 `blah`.
 
+
+## Additional Motions
+
+Where sensible this basic function can be made to work similar to the other regular vim motions.  So for instance we could have: 
+
+* `,/` The default. Searches forward for any matches
+* `,?` Searches backward
+* `,w` Searches forward but limited to matches that start at a word boundary
+* `,b` Like `,w` but backwards
+* `,^`,`,_` Search forward for matches that start with the first non-whitespace char
 
 ## Conclusion
 
